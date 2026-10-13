@@ -27,20 +27,28 @@
         </div>
       <!-- intro / game-over screen (shown whenever the game is not running) -->
           <section id="overlay">
-          <p class="eyebrow">CHAPTER I &nbsp;·&nbsp; FIVE STAGES &nbsp;·&nbsp; A BOSS AT THE END OF EACH</p>
+          <p class="eyebrow">CHAPTER I &nbsp;·&nbsp; TEN STAGES &nbsp;·&nbsp; A BOSS AT THE END OF EACH</p>
           <h1 id="ovTitle"><span>SHADOW</span><span>KNIGHT</span></h1>
           <div class="rule"><i></i></div>
           <p id="ovSub">The Legend of the Shadow Knight</p>
           <p id="ovStats" hidden></p>
           <button id="startBtn" type="button">Start</button>
+          <div class="stagepick" id="stagePick" hidden>
+            <div class="stagepick-row">
+              <button id="stPrev" type="button" aria-label="Previous stage">◀</button>
+              <span id="stLabel"></span>
+              <button id="stNext" type="button" aria-label="Next stage">▶</button>
+            </div>
+            <small id="stNote"></small>
+          </div>
           <div class="legend keys">
             <span><kbd>A</kbd><kbd>D</kbd> Move</span>
             <span><kbd>W</kbd> Jump</span>
             <span><kbd>J</kbd> Slash &middot; hold to thrust</span>
-            <span><kbd>K</kbd> Vortex</span>
-            <span><kbd>L</kbd> Wave &middot; hold to charge</span>
+            <span><kbd>K</kbd> Skill 1</span>
+            <span><kbd>L</kbd> Skill 2 &middot; hold to charge</span>
             <span><kbd>Shift</kbd> Dash</span>
-            <span><kbd>S</kbd> Parry &middot; time it as a hit lands</span>
+            <span><kbd>H</kbd> Parry &middot; time it as a hit lands</span>
             <span><kbd>Esc</kbd> Pause</span>
           </div>
           <div class="chips" data-chips></div>
@@ -51,6 +59,11 @@
         <section id="pause" class="panel">
           <h2>PAUSED</h2>
           <button id="btnResume" type="button" class="primary">Resume</button>
+          <div class="sliders">
+            <label>Button size <input id="rngSize" type="range" min="70" max="130" step="5" /></label>
+            <label>Button opacity <input id="rngOp" type="range" min="30" max="100" step="5" /></label>
+            <button class="btn dir demo" type="button" tabindex="-1" aria-hidden="true">▲</button>
+          </div>
           <div class="chips" data-chips></div>
           <button id="btnQuit" type="button" class="ghost">Quit to menu</button>
         </section>
@@ -59,7 +72,23 @@
           <p class="eyebrow" id="shopStage">Stage cleared</p>
           <h2>UPGRADES</h2>
           <p id="shopGold" class="gold">0 gold</p>
-          <div id="shopCards"></div>
+          <div class="tabs" id="shopTabs">
+            <button type="button" data-tab="stats">Stats</button>
+            <button type="button" data-tab="weapon">Weapon</button>
+            <button type="button" data-tab="skills">Skills</button>
+          </div>
+          <div id="shopBody">
+            <div id="shopPrev">
+              <canvas id="prevCv" width="480" height="270"></canvas>
+              <h3 id="prevName"></h3>
+              <p id="prevDesc"></p>
+            </div>
+            <div id="shopMain">
+              <div id="shopCards"></div>
+              <div id="relicBox" hidden></div>
+              <div id="shopPager" hidden><button id="pgPrev" type="button">◀</button><span id="pgLabel"></span><button id="pgNext" type="button">▶</button></div>
+            </div>
+          </div>
           <button id="btnNext" type="button" class="primary">Next stage &rarr;</button>
         </section>
 
@@ -68,6 +97,7 @@
 
         <div id="controls">
           <div id="pad">
+            <button class="btn dir jump" data-act="jump" aria-label="Jump">▲</button>
             <button class="btn dir" data-act="left" aria-label="Left">◀</button>
             <button class="btn dir" data-act="right" aria-label="Right">
               ▶
@@ -76,22 +106,13 @@
           <div id="actions">
           <button class="btn mid skill2" data-act="skill2" aria-label="Shadow Wave">🌊</button>
           <button class="btn mid skill1" data-act="skill1" aria-label="Vortex">🌀</button>
-          <button class="btn small dash" data-act="dash" aria-label="Dash">≫</button>
-          <button class="btn jump" data-act="jump" aria-label="Jump">▲</button>
-          <button class="btn mid parry" data-act="parry" aria-label="Parry">✦</button>
+          <button class="btn small dash" data-act="dash" aria-label="Dash">💨</button>
+          <button class="btn mid parry" data-act="parry" aria-label="Parry">🛡️</button>
           <button class="btn attack" data-act="attack" aria-label="Attack">⚔</button>
         </div>
         </div>
       </div>
     </main>
-    <script src="js/core.js"></script>
-    <script src="js/audio.js"></script>
-    <script src="js/input.js"></script>
-    <script src="js/game.js"></script>
-    <script src="js/background.js"></script>
-    <script src="js/draw.js"></script>
-    <script src="js/hud.js"></script>
-    <script src="js/ui.js"></script>
-    <script src="js/main.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
